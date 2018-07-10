@@ -1,5 +1,7 @@
 package _03_More_Array_Fun;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -49,6 +51,7 @@ public class MoreArrayFun {
 	// in a completely random order. Almost every run of the program should result
 	// in a different order.
 	static void printRandomStrings(String[] s) {
+		//Attempt with ArrayList
 		// Strings = new ArrayList<String>();
 		// int ran = r.nextInt(s.length);
 		// Strings.add(s[ran]);
@@ -61,33 +64,51 @@ public class MoreArrayFun {
 		// ran = r.nextInt(s.length);
 		// i--;
 		// }
-		if (s.length != 0) {
-			boolean alreadyPrint;
-			int counter=0;
-			Random r = new Random();
-			int[] ints = new int[s.length];
-			while(counter<s.length) {
-				alreadyPrint = false;
-				int ranInt = r.nextInt(ints.length);
-				System.out.println("ranInt is:"+ ranInt);
-				for (int j = 0; j < ints.length; j++) {
-					if (ints[j] == ranInt ) {
-						alreadyPrint = true;
-						break;
-						
-					}
-				}
-				if (!alreadyPrint) {
-					ints[counter] = ranInt;
-					counter++;
-				}
-				
 
+		// Attempt 2
+		// boolean alreadyPrint;
+		// int counter=0;
+		// Random r = new Random();
+		// int[] ints = new int[s.length];
+		// for (int i = 0; i < ints.length; i++) {
+		// alreadyPrint = false;
+		// int ranInt = r.nextInt(ints.length);
+		// for (int j = 0; j < ints.length; j++) {
+		// if (ints[j] == ranInt ) {
+		// alreadyPrint = true;
+		// break;
+		//
+		// }
+		// }
+		// if (alreadyPrint) {
+		// i--;
+		// continue;
+		// }
+		// }
+		// for (int i : ints) {
+		// System.out.println(s[ints[i]]);
+		// }
+		
+		// atempt 3
+		String[] printedStrings = new String[s.length];
+		for (int i = 0; i < printedStrings.length; i++) {
+			boolean printed = false;
+			int e = new Random().nextInt(s.length);
+			for (int j = 0; j < printedStrings.length; j++) {
+				if (s[e].equals(printedStrings[j])) {
+					printed = true;
+					break;
+				}
 			}
-			for (int i : ints) {
-				System.out.println(s[ints[i]]);
+			if (printed) {
+				i--;
+				continue;
+			} else {
+				printedStrings[i] = s[e];
 			}
-
+		}
+		for (String string : printedStrings) {
+			System.out.println(string);
 		}
 	}
 }
